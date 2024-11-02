@@ -1,4 +1,4 @@
-const { body, validationResult } = require('express-validator');
+const { body, param, validationResult } = require('express-validator');
 
 const validate = (req, res, next) => {
   const errors = validationResult(req);
@@ -22,9 +22,9 @@ const loginValidation = [
   validate
 ];
 
-// Follow validation (just validate the userId param is a number)
+// Follow validation (validate the userId param from URL)
 const followValidation = [
-  body('userId')
+  param('userId')
     .isInt()
     .withMessage('Invalid user ID'),
   validate
