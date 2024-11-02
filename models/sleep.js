@@ -32,24 +32,12 @@ module.exports = (sequelize, DataTypes) => {
     duration: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      comment: 'Duration in minutes',
-      get() {
-        if (this.clockOut && this.clockIn) {
-          return Math.round((this.clockOut - this.clockIn) / (1000 * 60));
-        }
-        return null;
-      }
+      comment: 'Duration in minutes'
     }
   }, {
     sequelize,
     modelName: 'Sleep',
-    hooks: {
-      beforeSave: (sleep) => {
-        if (sleep.clockOut && sleep.clockIn) {
-          sleep.duration = Math.round((sleep.clockOut - sleep.clockIn) / (1000 * 60));
-        }
-      }
-    }
+    tableName: 'Sleeps' // explicitly set table name to plural
   });
 
   return Sleep;

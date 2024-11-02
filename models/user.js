@@ -45,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
+    tableName: 'Users', 
     hooks: {
       beforeCreate: async (user) => {
         user.password = await hashPassword(user.password);
