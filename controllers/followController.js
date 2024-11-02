@@ -1,6 +1,6 @@
 const db = require("../models");
 
-exports.followUser = async (req, res) => {
+const followUser = async (req, res) => {
 	try {
 		const userId = Number.parseInt(req.params.userId);
 
@@ -28,7 +28,7 @@ exports.followUser = async (req, res) => {
 	}
 };
 
-exports.unfollowUser = async (req, res) => {
+const unfollowUser = async (req, res) => {
 	try {
 		const userId = Number.parseInt(req.params.userId);
 
@@ -50,7 +50,7 @@ exports.unfollowUser = async (req, res) => {
 	}
 };
 
-exports.getFriendsSleepRecords = async (req, res) => {
+const getFriendsSleepRecords = async (req, res) => {
 	try {
 		const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 
@@ -60,12 +60,14 @@ exports.getFriendsSleepRecords = async (req, res) => {
 					model: db.User,
 					as: "user",
 					attributes: ["username"],
+					required: true,
 					include: [
 						{
 							model: db.User,
 							as: "followers",
 							where: { id: req.user.id },
 							attributes: [],
+							required: true,
 						},
 					],
 				},
@@ -78,7 +80,7 @@ exports.getFriendsSleepRecords = async (req, res) => {
 					],
 				},
 			},
-			order: [["duration", "DESC"]],
+			order: [["clockOut", "DESC"]],
 			attributes: ["id", "clockIn", "clockOut", "duration"],
 		});
 
@@ -87,4 +89,10 @@ exports.getFriendsSleepRecords = async (req, res) => {
 		console.error("Get friends sleep records error:", error);
 		res.status(500).json({ message: "Error retrieving friends sleep records" });
 	}
+};
+
+module.exports = {
+	followUser,
+	unfollowUser,
+	getFriendsSleepRecords,
 };

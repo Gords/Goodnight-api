@@ -76,15 +76,16 @@ const clockOut = async (req, res) => {
 
 const formatDuration = (duration) => {
 	if (!duration) return null;
-	
-	const [hours, minutes, seconds] = duration.split(':').map(Number);
-	
+
+	const [hours, minutes, seconds] = duration.split(":").map(Number);
+
 	if (hours === 0 && minutes === 0) {
 		return `${seconds}s`;
-	}if (hours === 0) {
+	}
+	if (hours === 0) {
 		return `${minutes}m ${seconds}s`;
 	}
-		return `${hours}h ${minutes}m`;
+	return `${hours}h ${minutes}m`;
 };
 
 const getSleepRecords = async (req, res) => {
