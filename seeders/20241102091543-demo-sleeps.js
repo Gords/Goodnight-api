@@ -18,7 +18,7 @@ module.exports = {
         userId: userRows[0].id,  // alice's sleeps
         clockIn: new Date(now - 2 * oneDay),
         clockOut: new Date(now - 2 * oneDay + 8 * 60 * 60 * 1000), // 8 hours
-        duration: 8 * 60,
+        duration: '8:00:00', // 8 hours
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -26,7 +26,7 @@ module.exports = {
         userId: userRows[1].id,  // bob's sleeps
         clockIn: new Date(now - oneDay),
         clockOut: new Date(now - oneDay + 7 * 60 * 60 * 1000), // 7 hours
-        duration: 7 * 60,
+        duration: '7:00:00', // 7 hours
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -34,7 +34,7 @@ module.exports = {
         userId: userRows[2].id,  // charlie's sleeps
         clockIn: new Date(now - oneDay),
         clockOut: new Date(now - oneDay + 6 * 60 * 60 * 1000), // 6 hours
-        duration: 6 * 60,
+        duration: '6:00:00', // 6 hours
         createdAt: new Date(),
         updatedAt: new Date()
       }

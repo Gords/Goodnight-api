@@ -29,9 +29,9 @@ module.exports = {
         allowNull: true
       },
       duration: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DataTypes.STRING,
         allowNull: true,
-        comment: 'Duration in minutes'
+        comment: 'Duration as PostgreSQL interval'
       },
       createdAt: {
         allowNull: false,
