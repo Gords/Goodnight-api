@@ -47,6 +47,18 @@ npm run seed
 
 ## Testing the API
 
+### API Documentation
+
+Full API documentation is available at `http://localhost:3000/api-docs`. This interactive documentation provides:
+- Detailed endpoint descriptions
+- Request/response examples
+- Authentication requirements
+- Testing interface
+
+### Postman Collection
+
+The Postman collection is available in the `postman` directory.
+
 ### Demo Users
 The seed data creates three users:
 - username: `alice`, password: `password123`
@@ -179,14 +191,3 @@ curl http://localhost:3000/api/users/profile \
 - Input validation
 - SQL injection protection
 
-## API Documentation
-
-Full API documentation is available at `http://localhost:3000/api-docs`. This interactive documentation provides:
-- Detailed endpoint descriptions
-- Request/response examples
-- Authentication requirements
-- Testing interface
-
-### Postman Collection
-
-The Postman collection is available in the `postman` directory.
