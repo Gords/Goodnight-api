@@ -5,12 +5,18 @@ const followUser = async (req, res) => {
 		const userId = Number.parseInt(req.params.userId);
 
 		if (userId === req.user.id) {
-			return res.status(400).json({ message: "Cannot follow yourself" });
+			return res.status(400).json({
+				status: "error",
+				message: "Cannot follow yourself",
+			});
 		}
 
 		const userToFollow = await db.User.findByPk(userId);
 		if (!userToFollow) {
-			return res.status(404).json({ message: "User not found" });
+			return res.status(404).json({
+				status: "error",
+				message: "User not found",
+			});
 		}
 
 		await db.Follow.create({
@@ -18,13 +24,22 @@ const followUser = async (req, res) => {
 			followingId: userId,
 		});
 
-		res.json({ message: "Successfully followed user" });
+		res.json({
+			status: "success",
+			message: "Successfully followed user",
+		});
 	} catch (error) {
 		if (error.name === "SequelizeUniqueConstraintError") {
-			return res.status(400).json({ message: "Already following this user" });
+			return res.status(400).json({
+				status: "error",
+				message: "Already following this user",
+			});
 		}
 		console.error("Follow error:", error);
-		res.status(500).json({ message: "Error following user" });
+		res.status(500).json({
+			status: "error",
+			message: "Error following user",
+		});
 	}
 };
 

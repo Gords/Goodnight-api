@@ -30,15 +30,9 @@
 						"url": {
 							"raw": "http://localhost:3000/api/auth/login",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "3000",
-							"path": [
-								"api",
-								"auth",
-								"login"
-							]
+							"path": ["api", "auth", "login"]
 						}
 					},
 					"response": []
@@ -71,15 +65,9 @@
 						"url": {
 							"raw": "http://localhost:3000/api/sleep/clock-in",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "3000",
-							"path": [
-								"api",
-								"sleep",
-								"clock-in"
-							]
+							"path": ["api", "sleep", "clock-in"]
 						}
 					},
 					"response": []
@@ -107,15 +95,9 @@
 						"url": {
 							"raw": "http://localhost:3000/api/sleep/clock-out",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "3000",
-							"path": [
-								"api",
-								"sleep",
-								"clock-out"
-							]
+							"path": ["api", "sleep", "clock-out"]
 						}
 					},
 					"response": []
@@ -143,15 +125,9 @@
 						"url": {
 							"raw": "http://localhost:3000/api/sleep/records",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "3000",
-							"path": [
-								"api",
-								"sleep",
-								"records"
-							]
+							"path": ["api", "sleep", "records"]
 						}
 					},
 					"response": []
@@ -184,16 +160,9 @@
 						"url": {
 							"raw": "http://localhost:3000/api/users/2/follow",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"2",
-								"follow"
-							]
+							"path": ["api", "users", "2", "follow"]
 						}
 					},
 					"response": []
@@ -221,16 +190,9 @@
 						"url": {
 							"raw": "http://localhost:3000/api/users/2/follow",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"2",
-								"follow"
-							]
+							"path": ["api", "users", "2", "follow"]
 						}
 					},
 					"response": []
@@ -258,16 +220,9 @@
 						"url": {
 							"raw": "http://localhost:3000/api/users/friends/sleep-records",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"friends",
-								"sleep-records"
-							]
+							"path": ["api", "users", "friends", "sleep-records"]
 						}
 					},
 					"response": []

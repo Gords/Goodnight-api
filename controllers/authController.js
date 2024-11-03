@@ -8,16 +8,26 @@ const login = async (req, res) => {
 		const user = await db.User.findOne({ where: { username } });
 
 		if (!user || !(await verifyPassword(password, user.password))) {
-			return res.status(401).json({ message: "Invalid credentials" });
+			return res.status(401).json({
+				status: "error",
+				message: "Invalid credentials",
+			});
 		}
 
 		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
 			expiresIn: process.env.JWT_EXPIRES_IN,
 		});
 
-		res.json({ token });
+		res.json({
+			status: "success",
+			data: { token },
+		});
 	} catch (error) {
-		res.status(500).json({ message: "Error logging in" });
+		console.error("Login error:", error);
+		res.status(500).json({
+			status: "error",
+			message: "Error logging in",
+		});
 	}
 };
 

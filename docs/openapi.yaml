@@ -38,20 +38,110 @@ paths:
               schema:
                 type: object
                 properties:
-                  token:
+                  status:
                     type: string
-                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                    example: success
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+  /users/profile:
+    get:
+      tags:
+        - Users
+      summary: Get user profile with following/followers
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    $ref: '#/components/schemas/UserProfile'
+
+  /follows/{userId}:
+    post:
+      tags:
+        - Follows
+      summary: Follow a user
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully followed user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+    delete:
+      tags:
+        - Follows
+      summary: Unfollow a user
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully unfollowed user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /follows/sleep-records:
+    get:
+      tags:
+        - Follows
+      summary: Get friends' sleep records
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: List of friends' sleep records
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FriendSleepRecord'
 
   /sleep/clock-in:
     post:
       tags:
         - Sleep
-      summary: Record sleep start time
+      summary: Start a sleep session
       security:
         - BearerAuth: []
       responses:
         '200':
-          description: Successfully clocked in
+          description: Successfully started sleep session
           content:
             application/json:
               schema:
@@ -67,25 +157,12 @@ paths:
     post:
       tags:
         - Sleep
-      summary: Record sleep end time
+      summary: End a sleep session
       security:
         - BearerAuth: []
       responses:
         '200':
-          description: Successfully clocked out
-        '404':
-          description: No open sleep session found
-
-  /sleep/records:
-    get:
-      tags:
-        - Sleep
-      summary: Get user's sleep records from the past week
-      security:
-        - BearerAuth: []
-      responses:
-        '200':
-          description: List of sleep records
+          description: Successfully ended sleep session
           content:
             application/json:
               schema:
@@ -93,65 +170,32 @@ paths:
                 properties:
                   status:
                     type: string
+                    example: success
+                  data:
+                    $ref: '#/components/schemas/SleepRecord'
+
+  /sleep/records:
+    get:
+      tags:
+        - Sleep
+      summary: Get user's sleep records
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: List of user's sleep records
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
                   data:
                     type: array
                     items:
                       $ref: '#/components/schemas/SleepRecord'
-
-  /users/{userId}/follow:
-    post:
-      tags:
-        - Users
-      summary: Follow a user
-      security:
-        - BearerAuth: []
-      parameters:
-        - in: path
-          name: userId
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successfully followed user
-        '400':
-          description: Cannot follow yourself or already following
-        '404':
-          description: User not found
-    delete:
-      tags:
-        - Users
-      summary: Unfollow a user
-      security:
-        - BearerAuth: []
-      parameters:
-        - in: path
-          name: userId
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successfully unfollowed user
-        '404':
-          description: Follow relationship not found
-
-  /users/friends/sleep-records:
-    get:
-      tags:
-        - Users
-      summary: Get friends' sleep records from the past week
-      security:
-        - BearerAuth: []
-      responses:
-        '200':
-          description: List of friends' sleep records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/FriendSleepRecord'
 
 components:
   securitySchemes:
@@ -161,26 +205,50 @@ components:
       bearerFormat: JWT
 
   schemas:
-    SleepRecord:
+    UserProfile:
       type: object
       properties:
         id:
           type: integer
-          example: 1
-        clockIn:
+        username:
+          type: string
+        createdAt:
           type: string
           format: date-time
-          example: "2024-02-10T08:00:00.000Z"
-        clockOut:
+        following:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserBasic'
+        followers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserBasic'
+
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
           type: string
-          format: date-time
-          example: "2024-02-10T16:00:00.000Z"
-        duration:
+
+    SuccessResponse:
+      type: object
+      properties:
+        status:
           type: string
-          example: "8:00:00"
-        durationFormatted:
+          example: success
+        message:
           type: string
-          example: "8h 0m"
+
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
 
     FriendSleepRecord:
       type: object
@@ -199,4 +267,23 @@ components:
           type: object
           properties:
             username:
-              type: string 
+              type: string
+
+    SleepRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        clockIn:
+          type: string
+          format: date-time
+        clockOut:
+          type: string
+          format: date-time
+        duration:
+          type: string
+        durationFormatted:
+          type: string
+          example: "8h 30m"
