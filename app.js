@@ -5,12 +5,21 @@ const helmet = require("helmet");
 const connectDatabase = require("./config/database");
 const routes = require("./routes");
 const { apiLimiter } = require("./middlewares/rateLimiter");
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yaml');
+const fs = require('node:fs');
+const path = require('node:path');
 
 // Initialize passport config
 require("./config/passport")(passport);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Read OpenAPI file
+const openApiPath = path.join(__dirname, 'docs', 'openapi.yaml');
+const openApiFile = fs.readFileSync(openApiPath, 'utf8');
+const swaggerDocs = YAML.parse(openApiFile);
 
 // set security-related headers
 app.use(helmet());
@@ -21,6 +30,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
+
+// Serve OpenAPI documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Apply rate limiting to all API routes
 app.use("/api", apiLimiter);

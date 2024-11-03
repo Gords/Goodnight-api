@@ -194,3 +194,15 @@ The API includes proper error handling for common scenarios:
 - Security headers (Helmet)
 - Input validation
 - SQL injection protection (Sequelize ORM)
+
+## API Documentation
+
+The API documentation is available at `http://localhost:3000/api-docs`. This interactive documentation provides:
+- Detailed endpoint descriptions
+- Request/response examples
+- Authentication requirements
+- Testing interface
+
+### Postman Collection
+
+The Postman collection is available in the `postman` directory.
