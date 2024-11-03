@@ -129,7 +129,8 @@
 			  "url": {
 				"raw": "http://localhost:3000/api/sleep/clock-out",
 				"protocol": "http",
-				"host": "3000",
+				"host": ["localhost"],
+				"port": "3000",
 				"path": ["api", "sleep", "clock-out"]
 			  }
 			},
