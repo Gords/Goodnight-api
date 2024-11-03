@@ -21,7 +21,7 @@ cd Goodnight-api
 npm install
 ```
 
-3. Create a `.env` file in the root directory:
+3. Create a `.env` file in the root directory, for example:
 ```env
 DB_HOST=localhost
 DB_USER=postgres
