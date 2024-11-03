@@ -80,7 +80,7 @@ const getFriendsSleepRecords = async (req, res) => {
 					],
 				},
 			},
-			order: [["clockOut", "DESC"]],
+			order: [["duration", "DESC"]],
 			attributes: ["id", "clockIn", "clockOut", "duration"],
 		});
 
