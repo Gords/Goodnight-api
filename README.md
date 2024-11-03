@@ -12,8 +12,8 @@ A REST API for tracking sleep patterns and following friends' sleep records.
 ### Running with Docker (Recommended)
 1. Clone the repository
 ```bash
-git clone <repository-url>
-cd assignment-sleep
+git clone https://github.com/Gords/Goodnight-api
+cd Goodnight-api
 ```
 2. Install dependencies
 ```bash
