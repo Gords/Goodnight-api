@@ -20,24 +20,7 @@ cd Goodnight-api
 npm install
 ```
 
-3. Start the application using Docker Compose
-```bash
-docker-compose up --build
-```
-
-4. Run migrations and seed data
-```bash
-npm run migrate
-npm run seed
-```
-
-### Running Locally
-1. Install dependencies
-```bash
-npm install
-```
-
-2. Create a `.env` file in the root directory:
+3. Create a `.env` file in the root directory:
 ```env
 DB_HOST=localhost
 DB_USER=postgres
@@ -48,15 +31,15 @@ JWT_EXPIRES_IN=24h
 PORT=3000
 ```
 
-3. Run migrations and seed data
+3. Start the application using Docker Compose
+```bash
+docker-compose up --build
+```
+
+4. Run migrations and seed data
 ```bash
 npm run migrate
 npm run seed
-```
-
-4. Start the server
-```bash
-npm run dev
 ```
 
 ## Testing the API
